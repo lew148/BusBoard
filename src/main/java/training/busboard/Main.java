@@ -6,10 +6,9 @@ public class Main {
 
 
 
-        GetTimes getTimes;
-        getTimes = new GetTimes();
+        Utils utils = new Utils();
 
+        utils.printTimes(utils.pullTimes(utils.getNearbyStops("HA4 0BY").stopPoints.get(0).naptanId));
 
-        getTimes.printTimes(getTimes.pullTimes());
     }
 }	

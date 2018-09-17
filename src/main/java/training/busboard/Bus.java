@@ -7,19 +7,21 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Bus {
 
     // name of bus stop
-    String stationName;
+    public String stationName;
 
     // bus number
-    String lineName;
+    public String lineName;
 
     // bus stop letters
-    String platformName;
+    public String platformName;
 
     // current bus destination
-    String destinationName;
+    public String destinationName;
 
     // seconds to bus stop
-    Integer timeToStation;
+    public Integer timeToStation;
+
+
 
 
 }

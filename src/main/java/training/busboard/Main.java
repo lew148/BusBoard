@@ -19,11 +19,15 @@ public class Main {
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .get(new GenericType<List<Bus>>(){});
 
-        System.out.println(buses);
 
-        for (Bus bus : buses) {
-            System.out.println(bus.stationName);
+        for (Bus bus : buses){
+            String statement;
+            statement = "Bus " + bus.lineName + ", heading to " + bus.destinationName + ", will arrive at stop " + bus.platformName +
+                    " on " + bus.stationName + " in approx. " + bus.timeToStation/60 + " minutes!";
+            System.out.println(statement);
         }
+
+
         client.close();
     }
 }	

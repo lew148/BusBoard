@@ -22,6 +22,7 @@ public class Bus {
     public Integer timeToStation;
 
 
-
-
+    public Integer getTimeToStation() {
+        return timeToStation;
+    }
 }

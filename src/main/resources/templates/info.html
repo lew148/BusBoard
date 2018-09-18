@@ -13,7 +13,7 @@
         <p th:each="bus: ${busInfo.buses}">
             Bus <span style="font-weight: bold" th:text="${bus.lineName}"></span>
             heading to <span style="font-weight: bold" th:text="${bus.destinationName}"></span>
-            will arrive at stop <span style="font-weight: bold" th:text="${bus.platformName}"></span>
+            will arrive <span th:if="${bus.platformName != null}">at stop <span style="font-weight: bold" th:text="${bus.platformName}"></span></span>
             on <span style="font-weight: bold" th:text="${bus.stationName}"></span>
             in approx. <span style="font-weight: bold" th:text="${bus.timeToStation/60}"></span>
             minutes

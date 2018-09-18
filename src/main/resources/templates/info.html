@@ -3,21 +3,41 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout">
 <head>
+    <META HTTP-EQUIV="refresh" CONTENT="30">
     <title>Bus Information</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px;
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="content" class="container body-content">
-    <h2>Bus Information</h2>
+    <h1>Bus Information</h1>
     <div>
         <p>You entered postcode <span th:text="${busInfo.postcode}"></span></p>
-        <p th:each="bus: ${busInfo.buses}">
-            Bus <span style="font-weight: bold" th:text="${bus.lineName}"></span>
-            heading to <span style="font-weight: bold" th:text="${bus.destinationName}"></span>
-            will arrive <span th:if="${bus.platformName != null}">at stop <span style="font-weight: bold" th:text="${bus.platformName}"></span></span>
-            on <span style="font-weight: bold" th:text="${bus.stationName}"></span>
-            in approx. <span style="font-weight: bold" th:text="${bus.timeToStation/60}"></span>
-            minutes
-        </p>
+
+
+        <table>
+            <tr>
+                <th>Stop</th>
+                <th>Bus</th>
+                <th>Destination</th>
+                <th>Approx. TOA</th>
+            </tr>
+            <tr th:each="bus: ${busInfo.buses}">
+                <td th:if="${bus.platformName != 'null'}"><span th:text="${bus.platformName}"></span></td>
+                <td th:unless="${bus.platformName != 'null'}">N/A</td>
+            <td th:text="${bus.lineName}"></td>
+            <td th:text="${bus.destinationName}"></td>
+                <td th:if="${bus.timeToStation/60 != 0}"><span th:text="${bus.timeToStation/60 + ' minute(s)'}"></span></td>
+                <td th:unless="${bus.timeToStation/60!=0}"><span>Due</span></td>
+            </tr>
+        </table>
     </div>
 </div>
 </body>

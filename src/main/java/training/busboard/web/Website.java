@@ -32,7 +32,6 @@ public class Website {
         BusInfo busInfo = new BusInfo(postcode);
         busInfo.buses = buses;
 
-        System.out.println(buses.get(0).platformName);
 
 
         return new ModelAndView("info", "busInfo", busInfo);

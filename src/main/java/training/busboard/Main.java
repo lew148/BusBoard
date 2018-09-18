@@ -8,7 +8,7 @@ public class Main {
 
         Utils utils = new Utils();
 
-        utils.printTimes(utils.pullTimes(utils.getNearbyStops("HA4 0BY").stopPoints.get(0).naptanId));
+        utils.printTimes(utils.pullTimes(utils.getNearbyStops("RM11 3SQ").stopPoints.get(0).naptanId));
 
     }
 }	

@@ -28,15 +28,6 @@ public class Utils {
     }
 
 
-    public void printTimes(List<Bus> buses) {
-        for (Bus bus : buses) {
-            String statement;
-            statement = "Bus " + bus.lineName + ", heading to " + bus.destinationName + ", will arrive at stop " + bus.platformName +
-                    " on " + bus.stationName + " in approx. " + bus.timeToStation / 60 + " minutes!";
-            System.out.println(statement);
-        }
-    }
-
     public Location getLongLat(String postcode) {
 
         String longlatAPI_URL = "https://api.postcodes.io/postcodes/" + postcode;
@@ -66,5 +57,9 @@ public class Utils {
 
 
         return nearbyStops;
+    }
+
+    public List<Bus> getNearestStopInfo(String postcode) {
+        return pullTimes(getNearbyStops(postcode).stopPoints.get(0).naptanId);
     }
 }

@@ -43,9 +43,10 @@ public class Utils {
 
 
 
-    public NearbyStops getNearbyStops(String postcode) {
-        Double latitude = getLongLat(postcode).result.latitude;
-        Double longitude = getLongLat(postcode).result.longitude;
+    public NearbyStops getNearbyStops(Location location) {
+
+        Double latitude = location.result.latitude;
+        Double longitude = location.result.longitude;
 
         String nearbyAPI_URL = "https://api.tfl.gov.uk/StopPoint?stopTypes=NaptanPublicBusCoachTram&radius=500&lat="
                 + latitude + "&lon=" + longitude;
@@ -59,7 +60,7 @@ public class Utils {
         return nearbyStops;
     }
 
-    public List<Bus> getNearestStopInfo(String postcode) {
-        return pullTimes(getNearbyStops(postcode).stopPoints.get(0).naptanId);
-    }
+//    public List<Bus> getNearestStopInfo(String postcode, Integer index) {
+//        return pullTimes(getNearbyStops(postcode).stopPoints.get(index).naptanId);
+//    }
 }

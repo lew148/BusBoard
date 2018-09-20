@@ -16,6 +16,7 @@
             <form id="messageForm" th:action="@{/busInfo}" method="get">
                 <fieldset>
                     <legend>Postcode: </legend>
+                    <p th:text="${homePageModel.errorMessage}"></p>
                     <input type="text" name="postcode">
                     <input type="submit" value="Get Bus Info" />
                 </fieldset>

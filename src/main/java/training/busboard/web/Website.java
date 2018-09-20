@@ -6,10 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import training.busboard.Bus;
-import training.busboard.Utils;
+import training.busboard.*;
 
-import javax.rmi.CORBA.Util;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -18,23 +17,42 @@ public class Website {
 
     @RequestMapping("/")
     ModelAndView home() {
-        return new ModelAndView("index");
+        HomePageModel homePageModel = new HomePageModel();
+        return new ModelAndView("index", "homePageModel", homePageModel);
     }
 
     @RequestMapping("/busInfo")
     ModelAndView busInfo(@RequestParam("postcode") String postcode) {
 
-
         Utils utils = new Utils();
-
-        List<Bus> buses = utils.getNearestStopInfo(postcode);
-
-        BusInfo busInfo = new BusInfo(postcode);
-        busInfo.buses = buses;
+        Location location = null;
 
 
+        try {
+            location = utils.getLongLat(postcode);
+        } catch (Exception e){
+            HomePageModel homePageModel = new HomePageModel();
+            homePageModel.errorMessage = "Invalid Postcode! Try Again.";
 
-        return new ModelAndView("info", "busInfo", busInfo);
+            return new ModelAndView("index", "homePageModel", homePageModel);
+        }
+
+        NearbyStops nearbyStops = utils.getNearbyStops(location);
+
+
+        List<BusStop> busStops = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+
+            BusStop busStop = new BusStop();
+            busStop.buses = utils.pullTimes(nearbyStops.stopPoints.get(i).naptanId);
+
+            busStops.add(busStop);
+        }
+
+        BusInfoModel busInfoModel = new BusInfoModel(postcode);
+        busInfoModel.busStops = busStops;
+
+        return new ModelAndView("info", "busInfo", busInfoModel);
     }
 
 

@@ -5,31 +5,24 @@
 <head>
     <META HTTP-EQUIV="refresh" CONTENT="30">
     <title>Bus Information</title>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 15px;
-        }
-    </style>
 </head>
-<body>
+<body style="font-family: 'Bookman Old Style'">
 <div layout:fragment="content" class="container body-content">
-    <h1>Bus Information</h1>
+    <h1 class="display-3"><u>Bus Information</u></h1>
     <div>
-        <p>You entered postcode <span th:text="${busInfo.postcode}"></span></p>
+        <h2>Showing results nearby: <span th:text="${busInfo.postcode}"></span></h2>
 
-
-        <table>
+        <div>
+        <table class="table table-striped" th:each="busStop: ${busInfo.busStops}" >
+            <thead class="thead-dark">
             <tr>
                 <th>Stop</th>
                 <th>Bus</th>
                 <th>Destination</th>
-                <th>Approx. TOA</th>
+                <th>Approx. Time of Arrival</th>
             </tr>
-            <tr th:each="bus: ${busInfo.buses}">
+            </thead>
+            <tr th:each="bus: ${busStop.buses}">
                 <td th:if="${bus.platformName != 'null'}"><span th:text="${bus.platformName}"></span></td>
                 <td th:unless="${bus.platformName != 'null'}">N/A</td>
             <td th:text="${bus.lineName}"></td>
@@ -38,6 +31,7 @@
                 <td th:unless="${bus.timeToStation/60!=0}"><span>Due</span></td>
             </tr>
         </table>
+        </div>
     </div>
 </div>
 </body>

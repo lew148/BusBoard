@@ -7,5 +7,4 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class NearbyStopsResults {
 
     public String naptanId;
-    public String id;
 }
